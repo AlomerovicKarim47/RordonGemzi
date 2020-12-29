@@ -6,6 +6,7 @@ const startServer = async()=>{
 
     await load({expressApp:app})
 
+    console.log("RORDON GEMZI RUNNING ON PORT 7000.")
     app.listen(7000)
 }
 
