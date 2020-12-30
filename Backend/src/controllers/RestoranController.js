@@ -1,6 +1,6 @@
 import RestoranDataAccess from '../data/RestoranDataAccess'
 
-class RestoranController{
+const RestoranController = {
 
 }
 

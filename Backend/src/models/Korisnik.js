@@ -4,27 +4,33 @@ export default function (sequelize, DataTypes){
     const Korisnik = sequelize.define('Korisnik', {
         ime:{
             type: Sequelize.STRING,
-            unique:false
+            unique:false,
+            allowNull:false
         },
         prezime:{
             type: Sequelize.STRING,
-            unique:false
+            unique:false,
+            allowNull:false
         },
-        prezime:{
+        email:{
             type: Sequelize.STRING,
-            unique:true
+            unique:true,
+            allowNull:false
         },
         datumRodjenja:{
             type:Sequelize.STRING,
-            unique:false
+            unique:false,
+            allowNull:false
         },
         username:{
             type:Sequelize.STRING,
-            unique:true
+            unique:true,
+            allowNull:false
         },
         password:{
             type: Sequelize.STRING,
-            unique:false
+            unique:false,
+            allowNull:false
         }
     })
     return Korisnik

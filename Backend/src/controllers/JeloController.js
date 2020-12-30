@@ -1,6 +1,6 @@
 import JeloDataAccess from '../data/JeloDataAccess'
 
-class JeloController{
+const JeloController = {
 
 }
 
