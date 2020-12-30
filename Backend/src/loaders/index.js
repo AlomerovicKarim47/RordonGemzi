@@ -5,7 +5,6 @@ import RestoranDataAccess from '../data/RestoranDataAccess'
 import RezervacijaDataAccess from '../data/RezervacijaDataAccess'
 import MeniDataAccess from '../data/MeniDataAccess'
 import JeloDataAccess from '../data/JeloDataAccess'
-import Jelo from '../models/Jelo'
 
 const load = async ({expressApp})=>{
     const app = await loadExpress({app: expressApp})

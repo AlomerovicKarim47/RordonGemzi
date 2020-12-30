@@ -6,8 +6,9 @@ import Restoran from '../models/Restoran'
 import Jelo from '../models/Jelo'
 import Meni from '../models/Meni'
 
+const database = {}
+
 const loadSequelize = async() => {
-    const database = {}
     try{
         const connection = await mysql.createConnection({
             host: 'localhost',
