@@ -15,6 +15,12 @@ apiRouter.post("/register", KorisnikController.registrujKorisnika)
 
 apiRouter.post("/login", KorisnikController.login)
 
+apiRouter.get("/restorani", verifyToken, RestoranController.dobaviRestorane)
+
+apiRouter.delete("/restoran/:restoranId", verifyToken, RestoranController.obrisiRestoran)
+
+apiRouter.post("/restoran", verifyToken, RestoranController.dodajRestoran)
+
 apiRouter.get("/rezervacije", verifyToken, RezervacijaController.dobaviRezervacije)
 
 

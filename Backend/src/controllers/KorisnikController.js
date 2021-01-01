@@ -23,7 +23,7 @@ const login = async(req, res, next) => {
         return
     }
     
-    jwt.sign({korisnik}, 'secretkey', {expiresIn: '1800s'}, (err, token) => {
+    jwt.sign({korisnik}, 'secretkey'/*, {expiresIn: '1800s'}*/, (err, token) => {
         res.json({
             token
         })

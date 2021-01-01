@@ -1,6 +1,7 @@
 import RezervacijaDataAccess from '../data/RezervacijaDataAccess'
 import jwt from 'jsonwebtoken'
 
+//testni endpoint, moze se brisat
 const dobaviRezervacije = async (req, res, next) => {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if(err){
