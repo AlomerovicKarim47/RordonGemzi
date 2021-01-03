@@ -12,7 +12,7 @@ const verifyToken = function (req, res, next){
     }
     else
     {
-        res.sendStatus(403)
+        res.sendStatus(401)
     }
 }
 
@@ -21,7 +21,7 @@ const verifyRole =  function (role){
         const token = req.token;
         const currentUser = jwt.decode(token, 'secretkey')
         if (currentUser.korisnik.role != role)
-            res.sendStatus(401)
+            res.sendStatus(403)
         else
             next()
     }
