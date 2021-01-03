@@ -1,10 +1,13 @@
 import KorisnikDataAccess from '../data/KorisnikDataAccess'
 import jwt from 'jsonwebtoken'
+import passwordHash from 'password-hash'
 
 const registrujKorisnika = async(req, res, next) => {
     try
     {
-        await KorisnikDataAccess.dodajKorisnika(req.body)
+        let role = "user"
+        req.body.password = passwordHash.generate(req.body.password)
+        await KorisnikDataAccess.dodajKorisnika({...req.body, role: role})
         res.end()
     }
     catch(err){
@@ -16,13 +19,14 @@ const registrujKorisnika = async(req, res, next) => {
 
 const login = async(req, res, next) => {
     let korisnik = await KorisnikDataAccess.nadjiKorisnika(req.body)
-    if (!korisnik)
+    if (!korisnik || !passwordHash.verify(req.body.password, korisnik.password))
     {
         res.statusCode = 401
         res.end()
         return
     }
     
+    delete korisnik.password
     jwt.sign({korisnik}, 'secretkey'/*, {expiresIn: '1800s'}*/, (err, token) => {
         res.json({
             token
@@ -31,9 +35,24 @@ const login = async(req, res, next) => {
     return 
 }
 
+const izmjeniUlogu = async (req, res, next) => {
+    try {
+        let podaci = req.body
+        let korisnik = await KorisnikDataAccess.izmjeniUloguKorisnika(podaci)
+        if (!korisnik)
+            res.statusCode = 404
+        res.end()
+    } catch (error) {
+        res.statusCode = 500
+        res.end()
+        throw error
+    }
+}
+
 const KorisnikController={
     registrujKorisnika,
-    login
+    login,
+    izmjeniUlogu
 }
 
 export default KorisnikController

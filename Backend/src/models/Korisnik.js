@@ -31,6 +31,11 @@ export default function (sequelize, DataTypes){
             type: Sequelize.STRING,
             unique:false,
             allowNull:false
+        },
+        role:{
+            type: Sequelize.STRING,
+            unique: false,
+            allowNull: false
         }
     })
     return Korisnik
