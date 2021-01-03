@@ -46,5 +46,20 @@ class KorisnikDataAccess{
             throw error
         }
     }
+
+    static async dobaviKorisnike(){
+        try {
+            let korisniciRez = await database.Korisnik.findAll()
+            let korisnici = []
+            korisniciRez.forEach(element => {
+                delete element.dataValues.password
+                korisnici.push(element.dataValues)
+            });
+            return korisnici
+
+        } catch (error) {
+            throw error
+        }
+    }
 }
 export default KorisnikDataAccess

@@ -49,10 +49,22 @@ const izmjeniUlogu = async (req, res, next) => {
     }
 }
 
+const dobaviKorisnike = async (req, res, next) => {
+    try {
+        let korisnici = await KorisnikDataAccess.dobaviKorisnike();
+        res.end(JSON.stringify(korisnici))
+    } catch (error) {
+        res.statusCode = 500
+        res.end()
+        throw error
+    }
+}
+
 const KorisnikController={
     registrujKorisnika,
     login,
-    izmjeniUlogu
+    izmjeniUlogu,
+    dobaviKorisnike
 }
 
 export default KorisnikController
