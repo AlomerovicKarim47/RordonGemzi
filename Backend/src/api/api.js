@@ -11,12 +11,14 @@ const apiRouter = Router()
 
 //apiRouter.get("/", helloWorldController)
 
-//Korisnici - registracija, login, autentifikacija i autorizacija
+//Korisnici - registracija, login, autentifikacija i autorizacija, dobavljanje liste korisnika
 apiRouter.post("/register", KorisnikController.registrujKorisnika)
 
 apiRouter.post("/login", KorisnikController.login)
 
 apiRouter.put("/uloga", verifyToken, verifyRole('admin'), KorisnikController.izmjeniUlogu)
+
+apiRouter.get("/korisnici", verifyToken, verifyRole("admin"), KorisnikController.dobaviKorisnike)
 
 //Restorani - dobavljanje, brisanje, dodavanje
 apiRouter.get("/restorani", verifyToken, RestoranController.dobaviRestorane)
