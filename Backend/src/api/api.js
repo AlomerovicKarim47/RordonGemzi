@@ -34,21 +34,21 @@ apiRouter.delete("/restoran/:restoranId", verifyToken, verifyRole('admin'), vali
 apiRouter.post("/restoran", verifyToken, verifyRole('admin'), validation.validateDodajRestoran, validation.checkValidationResults, RestoranController.dodajRestoran)
 
 //Rezervacije - dobavljanje, brisanje i dodavanje
-apiRouter.get("/rezervacije", verifyToken, RezervacijaController.dobaviRezervacije)
+apiRouter.get("/rezervacije", verifyToken, verifyRole("admin"), RezervacijaController.dobaviRezervacije)
 
-apiRouter.post("/rezervacija", verifyToken, RezervacijaController.dodajRezervaciju)
+apiRouter.post("/rezervacija", verifyToken, validation.validateDodajRezervaciju, validation.checkValidationResults, RezervacijaController.dodajRezervaciju)
 
-apiRouter.delete("/rezervacija/:rezervacijaId", verifyToken, RezervacijaController.obrisiRezervaciju)
+apiRouter.delete("/rezervacija/:rezervacijaId", verifyToken, verifyRole("admin"), validation.validateObrisiRezervaciju, validation.checkValidationResults, RezervacijaController.obrisiRezervaciju)
 
 //Jela - dobavljanje jela za restoran, dodavanje jela, brisanje i editovanje
-apiRouter.get("/jela", verifyToken, JeloController.dobaviJela);
+apiRouter.get("/jela", verifyToken, verifyRole("admin"), JeloController.dobaviJela);
 
-apiRouter.post("/jelo", verifyToken, JeloController.dodajJelo);
+apiRouter.post("/jelo", verifyToken, verifyRole("admin"), validation.validateDodajJelo, validation.checkValidationResults, JeloController.dodajJelo);
 
 apiRouter.get("/jelo", verifyToken, JeloController.dobaviJelaZaRestoran);
 
 //Brisanje i dodavanje jela za restoran
-apiRouter.delete("/restoran/:restoranId/jelo/:jeloId", verifyToken, MeniController.obrisiJeloIzRestorana);
-apiRouter.post("/restoran/:restoranId/jelo/:jeloId", verifyToken, MeniController.dodajJeloZaRestoran);
+apiRouter.delete("/restoran/:restoranId/jelo/:jeloId", verifyToken, verifyRole("admin"), validation.validateBrisiDodajIzRestorana, validation.checkValidationResults, MeniController.obrisiJeloIzRestorana);
+apiRouter.post("/restoran/:restoranId/jelo/:jeloId", verifyToken, verifyRole("admin"), validation.validateBrisiDodajIzRestorana, validation.checkValidationResults, MeniController.dodajJeloZaRestoran);
 
 export default apiRouter
