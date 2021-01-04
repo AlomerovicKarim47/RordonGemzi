@@ -1,6 +1,7 @@
 import KorisnikDataAccess from '../data/KorisnikDataAccess'
 import jwt from 'jsonwebtoken'
 import passwordHash from 'password-hash'
+import { validationResult } from 'express-validator'
 
 const registrujKorisnika = async(req, res, next) => {
     try
