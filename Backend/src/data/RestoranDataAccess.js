@@ -5,6 +5,15 @@ class RestoranDataAccess{
         database = db
     }
 
+    static async prebrojiRestorane(){
+        try {
+            let restorani = await database.Restoran.findAndCountAll()
+            return restorani.count
+        } catch (error) {
+            throw error
+        }
+    }
+
     static async dobaviRestorane(){
         try {
             let restoraniRez = await database.Restoran.findAll()

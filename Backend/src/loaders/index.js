@@ -34,6 +34,52 @@ const load = async ({expressApp})=>{
             
         }
 
+        let brojRestorana =  await RestoranDataAccess.prebrojiRestorane()
+        if(brojRestorana == 0){
+            let restoran = {
+                naziv: "Restoran1",
+                adresa: "Ismeta Mujezinovica",
+                brojMjesta: 35,
+                brojDostupnihMjesta: 35
+            }
+            await RestoranDataAccess.dodajRestoran(restoran); 
+        }
+
+        let brojRezevracija = await RezervacijaDataAccess.prebrojiRezervacije()
+        if(brojRezevracija == 0){
+            let dodajRezervaciju = {
+                restoranId: 1,
+                brojOsoba: 5,
+                datum: "21.1.2021",
+                vrijeme: "17:00"
+            }
+
+            await RezervacijaDataAccess.dodajRezervaciju(dodajRezervaciju)
+        }
+        
+        let brojJela = await JeloDataAccess.prebrojiJela();
+        if(brojJela == 0){
+            let dodajJelo = {
+                    naziv: "Piletina",
+                    opis :  "Sarajevska piletina",
+                    cijena: "5.00"
+                }
+            
+                await JeloDataAccess.dodajJelo(dodajJelo);
+        }
+
+
+        let brojMenija =  await MeniDataAccess.prebrojiMenije();
+        if(brojMenija == 0){
+            let meni = {
+                restoranId: 1,
+                jeloId: 1
+            }
+
+            await MeniDataAccess.dodajMeni(meni);
+        }
+
+
         console.log("--Sequelize loaded.--")
         return{app}
     }
