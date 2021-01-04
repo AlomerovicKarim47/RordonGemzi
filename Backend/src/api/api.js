@@ -6,8 +6,12 @@ import RezervacijaController from '../controllers/RezervacijaController'
 import MeniController from '../controllers/MeniController'
 import JeloController from '../controllers/JeloController'
 import {verifyToken, verifyRole} from '../middleware/index'
+
 import validation from '../middleware/validation'
 import { body } from 'express-validator'
+
+import Jelo from '../models/Jelo'
+
 
 const apiRouter = Router()
 
@@ -29,8 +33,22 @@ apiRouter.delete("/restoran/:restoranId", verifyToken, verifyRole('admin'), vali
 
 apiRouter.post("/restoran", verifyToken, verifyRole('admin'), validation.validateDodajRestoran, validation.checkValidationResults, RestoranController.dodajRestoran)
 
-//Rezervacije
+//Rezervacije - dobavljanje, brisanje i dodavanje
 apiRouter.get("/rezervacije", verifyToken, RezervacijaController.dobaviRezervacije)
 
+apiRouter.post("/rezervacija", verifyToken, RezervacijaController.dodajRezervaciju)
+
+apiRouter.delete("/rezervacija/:rezervacijaId", verifyToken, RezervacijaController.obrisiRezervaciju)
+
+//Jela - dobavljanje jela za restoran, dodavanje jela, brisanje i editovanje
+apiRouter.get("/jela", verifyToken, JeloController.dobaviJela);
+
+apiRouter.post("/jelo", verifyToken, JeloController.dodajJelo);
+
+apiRouter.get("/jelo", verifyToken, JeloController.dobaviJelaZaRestoran);
+
+//Brisanje i dodavanje jela za restoran
+apiRouter.delete("/restoran/:restoranId/jelo/:jeloId", verifyToken, MeniController.obrisiJeloIzRestorana);
+apiRouter.post("/restoran/:restoranId/jelo/:jeloId", verifyToken, MeniController.dodajJeloZaRestoran);
 
 export default apiRouter
