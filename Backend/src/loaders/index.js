@@ -1,5 +1,6 @@
 import loadExpress from './express'
 import loadSequelize from './sequelize'
+import loadRateLimiting from './rateLimiter'
 import KorisnikDataAccess from '../data/KorisnikDataAccess'
 import RestoranDataAccess from '../data/RestoranDataAccess'
 import RezervacijaDataAccess from '../data/RezervacijaDataAccess'
@@ -8,6 +9,7 @@ import JeloDataAccess from '../data/JeloDataAccess'
 import passwordHash from 'password-hash'
 
 const load = async ({expressApp})=>{
+    loadRateLimiting({app:expressApp})
     const app = await loadExpress({app: expressApp})
     console.log("--Express app loaded.--")
     const database = await loadSequelize()
@@ -35,6 +37,7 @@ const load = async ({expressApp})=>{
         }
 
         console.log("--Sequelize loaded.--")
+
         return{app}
     }
     catch(error){
