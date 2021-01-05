@@ -47,6 +47,8 @@ apiRouter.post("/jelo", verifyToken, verifyRole("admin"), validation.validateDod
 
 apiRouter.get("/jelo", verifyToken, JeloController.dobaviJelaZaRestoran);
 
+apiRouter.delete("/jelo/:jeloId", verifyToken, verifyRole("admin"),validation.validateObrisiJelo, validation.checkValidationResults, JeloController.obrisiJelo )
+
 //Brisanje i dodavanje jela za restoran
 apiRouter.delete("/restoran/:restoranId/jelo/:jeloId", verifyToken, verifyRole("admin"), validation.validateBrisiDodajIzRestorana, validation.checkValidationResults, MeniController.obrisiJeloIzRestorana);
 apiRouter.post("/restoran/:restoranId/jelo/:jeloId", verifyToken, verifyRole("admin"), validation.validateBrisiDodajIzRestorana, validation.checkValidationResults, MeniController.dodajJeloZaRestoran);

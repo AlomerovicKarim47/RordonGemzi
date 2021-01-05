@@ -46,7 +46,9 @@ const validateDodajRezervaciju = [
     body("datum").isDate({
         format:"DD/MM/YYYY"
     }),
-    body("vrijeme").notEmpty().escape()
+    body("vrijeme").notEmpty().escape(),
+    
+    param("userId").notEmpty().isNumeric(),
 ]
 
 const validateObrisiRezervaciju = [
@@ -64,6 +66,11 @@ const validateDodajJelo = [
 //Brisanje i dodavanje jela iz restorana
 const validateBrisiDodajIzRestorana = [
     param("restoranId").notEmpty().isNumeric(),
+    param("jeloId").notEmpty().isNumeric()
+]
+
+//Brisanje jela
+const validateObrisiJelo = [
     param("jeloId").notEmpty().isNumeric()
 ]
 
@@ -89,6 +96,7 @@ const validation = {
     validateObrisiRezervaciju,
     validateDodajJelo,
     validateBrisiDodajIzRestorana,
+    validateObrisiJelo,
     checkValidationResults
 }
 

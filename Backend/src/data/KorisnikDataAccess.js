@@ -25,6 +25,17 @@ class KorisnikDataAccess{
         }
     }
 
+    static async nadjiKorisnikaPoIdu(userId){
+        try {
+            let korisnik = await database.Korisnik.findOne({where:{id:userId}})
+            if (korisnik)
+                return korisnik.dataValues
+            return null
+        } catch (error) {
+            throw(error)
+        }
+    }
+
     static async izmjeniUloguKorisnika(podaci){
         try {
             let korisnik = await database.Korisnik.findOne({where:{username:podaci.username}})

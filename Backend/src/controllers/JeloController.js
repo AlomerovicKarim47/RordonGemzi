@@ -47,10 +47,23 @@ const dobaviJelaZaRestoran =  async (req, res) => {
     }   
 }
 
+const obrisiJelo =async (req, res) => {
+    try {
+        let jeloId= req.params.jeloId
+        await JeloDataAccess.obrisiJelo(jeloId);
+        res.end();
+    } catch (error) {
+        res.statusCode = 500
+        res.end()
+        throw error
+    }
+}
+
 const JeloController = {
     dobaviJela,
     dodajJelo,
-    dobaviJelaZaRestoran
+    dobaviJelaZaRestoran,
+    obrisiJelo
 }
 
 export default JeloController

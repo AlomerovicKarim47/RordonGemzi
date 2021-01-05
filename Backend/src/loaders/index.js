@@ -53,7 +53,8 @@ const load = async ({expressApp})=>{
                 restoranId: 1,
                 brojOsoba: 5,
                 datum: "21.1.2021",
-                vrijeme: "17:00"
+                vrijeme: "17:00",
+                userId: 1,
             }
 
             await RezervacijaDataAccess.dodajRezervaciju(dodajRezervaciju)

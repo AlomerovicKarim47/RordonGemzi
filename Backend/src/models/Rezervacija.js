@@ -21,6 +21,11 @@ export default function (sequelize, DataTypes){
             type:Sequelize.STRING,
             unique:false,
             allowNull:false
+        },
+        userId:{
+            type: Sequelize.INTEGER,
+            unique: false,
+            allowNull: false
         }
     })
     return Rezervacija

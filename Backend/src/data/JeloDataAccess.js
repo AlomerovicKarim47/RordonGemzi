@@ -49,5 +49,15 @@ class JeloDataAccess{
         }
     }
 
+    static async obrisiJelo(jeloId){
+        try {
+             await database.Jelo.destroy({where:{id: jeloId}});
+             await database.Meni.destroy({where:{jeloId: jeloId}});
+             return;
+        } catch (error) {
+            throw error
+        }
+    }
+
 }
 export default JeloDataAccess

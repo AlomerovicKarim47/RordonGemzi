@@ -1,3 +1,5 @@
+import KorisnikDataAccess from "./KorisnikDataAccess"
+
 let database = null
 
 class RezervacijaDataAccess{
@@ -18,10 +20,14 @@ class RezervacijaDataAccess{
         try {
             let rezervacijeRez = await database.Rezervacija.findAll()
             let rezervacije = []
-            rezervacijeRez.forEach(element => {
-                rezervacije.push(element.dataValues)
-            });
-            return rezervacije
+
+            for (const r of rezervacijeRez) {
+                let user = await KorisnikDataAccess.nadjiKorisnikaPoIdu(r.userId);
+                r = r.toJSON(); 
+                r.user = user.ime + ' '+ user.prezime;
+                rezervacije.push(r);
+            }            
+            return rezervacije;
     
         } catch (error) {
             throw error
