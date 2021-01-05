@@ -29,7 +29,7 @@ const load = async ({expressApp})=>{
                 username : "dddd2",
                 password : passwordHash.generate("ergje14gfieg8fgh8dfgjibmn42bb0p6g9pxx"),
                 email : "kalomerovic@mail.com",
-                datumRodjenja : "16.12.1997.",
+                datumRodjenja : "16/12/1997",
                 role:"admin"
             }
             await KorisnikDataAccess.dodajKorisnika(admin)
