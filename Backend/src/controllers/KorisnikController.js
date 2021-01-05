@@ -28,7 +28,7 @@ const login = async(req, res, next) => {
     }
     
     delete korisnik.password
-    jwt.sign({korisnik}, 'secretkey'/*, {expiresIn: '1800s'}*/, (err, token) => {
+    jwt.sign({korisnik}, '123se14c88retkey420'/*, {expiresIn: '1800s'}*/, (err, token) => {
         res.json({
             token,
             korisnik

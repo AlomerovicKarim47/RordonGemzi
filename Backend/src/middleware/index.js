@@ -9,7 +9,7 @@ const verifyToken = function (req, res, next){
         {
             const bearer = bearerHeader.split(' ')
             const bearerToken = bearer[1]
-            jwt.verify(bearerToken, 'secretkey')
+            jwt.verify(bearerToken, '123se14c88retkey420')
             req.token = bearerToken
             next()
         }
@@ -26,7 +26,7 @@ const verifyToken = function (req, res, next){
 const verifyRole =  function (role){
     return function (req, res, next){
         const token = req.token;
-        const currentUser = jwt.decode(token, 'secretkey')
+        const currentUser = jwt.decode(token, '123se14c88retkey420')
         if (currentUser.korisnik.role != role)
             res.sendStatus(403)
         else

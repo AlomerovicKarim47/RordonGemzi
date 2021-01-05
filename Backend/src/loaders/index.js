@@ -27,7 +27,7 @@ const load = async ({expressApp})=>{
                 ime: "Karim",
                 prezime : "Alomerovic",
                 username : "dddd2",
-                password : passwordHash.generate("12345"),
+                password : passwordHash.generate("ergje14gfieg8fgh8dfgjibmn42bb0p6g9pxx"),
                 email : "kalomerovic@mail.com",
                 datumRodjenja : "16.12.1997.",
                 role:"admin"
