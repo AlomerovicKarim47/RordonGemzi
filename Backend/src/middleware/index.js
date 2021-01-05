@@ -5,10 +5,17 @@ const verifyToken = function (req, res, next){
 
     if (typeof bearerHeader !== 'undefined')
     {
-        const bearer = bearerHeader.split(' ')
-        const bearerToken = bearer[1]
-        req.token = bearerToken
-        next()
+        try
+        {
+            const bearer = bearerHeader.split(' ')
+            const bearerToken = bearer[1]
+            jwt.verify(bearerToken, 'secretkey')
+            req.token = bearerToken
+            next()
+        }
+        catch(err){
+            res.sendStatus(401)
+        }
     }
     else
     {
