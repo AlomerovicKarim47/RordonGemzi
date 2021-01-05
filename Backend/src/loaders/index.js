@@ -33,7 +33,16 @@ const load = async ({expressApp})=>{
                 role:"admin"
             }
             await KorisnikDataAccess.dodajKorisnika(admin)
-            
+            let user = {
+                ime: "Mujo",
+                prezime : "Hadzic",
+                username : "m2",
+                password : passwordHash.generate("12345"),
+                email : "mujo@mail.com",
+                datumRodjenja : "01/10/1997",
+                role:"user"
+            }
+            await KorisnikDataAccess.dodajKorisnika(user)
         }
 
         let brojRestorana =  await RestoranDataAccess.prebrojiRestorane()
@@ -54,7 +63,7 @@ const load = async ({expressApp})=>{
                 brojOsoba: 5,
                 datum: "21.1.2021",
                 vrijeme: "17:00",
-                userId: 1,
+                userId: 1
             }
 
             await RezervacijaDataAccess.dodajRezervaciju(dodajRezervaciju)

@@ -48,7 +48,7 @@ const validateDodajRezervaciju = [
     }),
     body("vrijeme").notEmpty().escape(),
     
-    param("userId").notEmpty().isNumeric(),
+    body("userId").notEmpty().isNumeric(),
 ]
 
 const validateObrisiRezervaciju = [
