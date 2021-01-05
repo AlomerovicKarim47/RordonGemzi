@@ -30,7 +30,8 @@ const login = async(req, res, next) => {
     delete korisnik.password
     jwt.sign({korisnik}, 'secretkey'/*, {expiresIn: '1800s'}*/, (err, token) => {
         res.json({
-            token
+            token,
+            korisnik
         })
     }) 
     return 
