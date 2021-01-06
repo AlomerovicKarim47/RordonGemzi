@@ -1,9 +1,11 @@
 import { json, urlencoded } from "body-parser"
 import helmet from 'helmet'
+import cors from 'cors'
 
 import apiRouter from '../api/api'
 
 const loadExpress = async ({app}) => {
+    app.use(cors())
     app.use(json())
     app.use(urlencoded({extended:false}))
     app.use(apiRouter)
