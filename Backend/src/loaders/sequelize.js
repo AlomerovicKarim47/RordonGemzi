@@ -8,21 +8,21 @@ import Meni from '../models/Meni'
 
 const database = {}
 
-const loadSequelize = async() => {
-    try{
+const loadSequelize = async () => {
+    try {
         const connection = await mysql.createConnection({
             host: 'localhost',
             port: 3306,
             user: 'root',
-            password: ''
+            password: 'root'
         })
         await connection.query('CREATE DATABASE IF NOT EXISTS rordongemzi')
         console.log("Created the databse.")
-        const sequelize = new Sequelize("mysql://root@localhost:3306/rordongemzi", {logging:false})
-    
+        const sequelize = new Sequelize("mysql://root:root@localhost:3306/rordongemzi", { logging: false })
+
         database.Sequelize = Sequelize
         database.sequelize = sequelize
-    
+
         database.Korisnik = Korisnik(sequelize)
         database.Rezervacija = Rezervacija(sequelize)
         database.Restoran = Restoran(sequelize)
@@ -35,9 +35,9 @@ const loadSequelize = async() => {
         await database.sequelize.sync()
         console.log("Tables created.")
     }
-    catch (error){
+    catch (error) {
         console.log("Unable to connect to the database.", error)
-        throw(error)
+        throw (error)
     }
     return database
 }

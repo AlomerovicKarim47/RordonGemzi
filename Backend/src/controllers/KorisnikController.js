@@ -3,38 +3,35 @@ import jwt from 'jsonwebtoken'
 import passwordHash from 'password-hash'
 import { validationResult } from 'express-validator'
 
-const registrujKorisnika = async(req, res, next) => {
-    try
-    {
+const registrujKorisnika = async (req, res, next) => {
+    try {
         let role = "user"
-        req.body.password = passwordHash.generate(req.body.password)
-        await KorisnikDataAccess.dodajKorisnika({...req.body, role: role})
+        await KorisnikDataAccess.dodajKorisnika({ ...req.body, role: role })
         res.end()
     }
-    catch(err){
+    catch (err) {
         res.statusCode = 500
         res.end()
         throw err
     }
 }
 
-const login = async(req, res, next) => {
+const login = async (req, res, next) => {
     let korisnik = await KorisnikDataAccess.nadjiKorisnika(req.body)
-    if (!korisnik || !passwordHash.verify(req.body.password, korisnik.password))
-    {
+    if (!korisnik || !(req.body.password === korisnik.password)) {
         res.statusCode = 401
         res.end()
         return
     }
-    
+
     delete korisnik.password
-    jwt.sign({korisnik}, '123se14c88retkey420'/*, {expiresIn: '1800s'}*/, (err, token) => {
+    jwt.sign({ korisnik }, '123se14c88retkey420'/*, {expiresIn: '1800s'}*/, (err, token) => {
         res.json({
             token,
             korisnik
         })
-    }) 
-    return 
+    })
+    return
 }
 
 const izmjeniUlogu = async (req, res, next) => {
@@ -62,7 +59,7 @@ const dobaviKorisnike = async (req, res, next) => {
     }
 }
 
-const KorisnikController={
+const KorisnikController = {
     registrujKorisnika,
     login,
     izmjeniUlogu,
