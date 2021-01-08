@@ -1,4 +1,4 @@
-import MeniDataAccess from '../data/MeniDataAccess'
+import MeniDataAccess from '../data/MeniDataAccess.js'
 
 
 

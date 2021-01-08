@@ -1,10 +1,10 @@
 import Sequelize from 'sequelize'
 import mysql from 'mysql2/promise'
-import Korisnik from '../models/Korisnik'
-import Rezervacija from '../models/Rezervacija'
-import Restoran from '../models/Restoran'
-import Jelo from '../models/Jelo'
-import Meni from '../models/Meni'
+import Korisnik from '../models/Korisnik.js'
+import Rezervacija from '../models/Rezervacija.js'
+import Restoran from '../models/Restoran.js'
+import Jelo from '../models/Jelo.js'
+import Meni from '../models/Meni.js'
 
 const database = {}
 

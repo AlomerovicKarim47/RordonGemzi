@@ -1,16 +1,12 @@
 import {Router} from 'express'
-import {helloWorldController} from '../controllers/TestControllers'
-import KorisnikController from '../controllers/KorisnikController'
-import RestoranController from '../controllers/RestoranController'
-import RezervacijaController from '../controllers/RezervacijaController'
-import MeniController from '../controllers/MeniController'
-import JeloController from '../controllers/JeloController'
-import {verifyToken, verifyRole} from '../middleware/index'
+import KorisnikController from '../controllers/KorisnikController.js'
+import RestoranController from '../controllers/RestoranController.js'
+import RezervacijaController from '../controllers/RezervacijaController.js'
+import MeniController from '../controllers/MeniController.js'
+import JeloController from '../controllers/JeloController.js'
+import {verifyToken, verifyRole} from '../middleware/index.js'
 
-import validation from '../middleware/validation'
-import { body } from 'express-validator'
-
-import Jelo from '../models/Jelo'
+import validation from '../middleware/validation.js'
 
 
 const apiRouter = Router()

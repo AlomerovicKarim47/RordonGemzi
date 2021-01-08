@@ -1,5 +1,4 @@
 import { body, param, validationResult } from 'express-validator'
-import { check } from 'express-validator/src/middlewares/check'
 
 //Validacije
 
@@ -8,7 +7,7 @@ const validateRegister =
 [body("ime").notEmpty().escape(), 
 body("prezime").notEmpty().escape(),
 body("username").notEmpty().escape(),
-body("password").notEmpty().escape(),
+body("password").notEmpty().isLength({min:8}).escape(),
 body("email").isEmail().escape(),
 body("datumRodjenja").isDate({
     format:"DD/MM/YYYY"
@@ -42,11 +41,15 @@ const validateObrisiRestoran = [
 
 const validateDodajRezervaciju = [
     body("restoranId").notEmpty().isNumeric(),
-    body("brojOsoba").notEmpty().isNumeric(),
+    body("brojOsoba").notEmpty().isNumeric().custom((value, {req}) => {
+        return value >= 1 && value <= 6
+    }),
     body("datum").isDate({
         format:"DD/MM/YYYY"
     }),
-    body("vrijeme").notEmpty().escape(),
+    body("vrijeme").notEmpty().custom((value) => {
+        return /^$|^(([01][0-9])|(2[0-3])):[0-5][0-9]$/.test(value)
+    }),
     
     body("userId").notEmpty().isNumeric(),
 ]
@@ -60,7 +63,7 @@ const validateObrisiRezervaciju = [
 const validateDodajJelo = [
     body("naziv").notEmpty().escape(),
     body("opis").notEmpty().escape(),
-    body("cijena").notEmpty().escape()
+    body("cijena").notEmpty().isNumeric()
 ]
 
 //Brisanje i dodavanje jela iz restorana

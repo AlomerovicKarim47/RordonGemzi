@@ -1,5 +1,4 @@
-import RezervacijaDataAccess from '../data/RezervacijaDataAccess'
-import jwt from 'jsonwebtoken'
+import RezervacijaDataAccess from '../data/RezervacijaDataAccess.js'
 
 const dobaviRezervacije = async (req, res, next) => {
     try{

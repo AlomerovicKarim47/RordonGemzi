@@ -1,5 +1,5 @@
-import JeloDataAccess from '../data/JeloDataAccess'
-import MeniDataAccess from '../data/MeniDataAccess'
+import JeloDataAccess from '../data/JeloDataAccess.js'
+import MeniDataAccess from '../data/MeniDataAccess.js'
 
 
 const dobaviJela = async (req, res, next) => {

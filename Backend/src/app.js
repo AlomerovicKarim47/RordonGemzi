@@ -1,5 +1,5 @@
 import express from 'express'
-import load from './loaders/index'
+import load from './loaders/index.js'
 const https = require('https')
 const path = require('path')
 const fs = require('fs')

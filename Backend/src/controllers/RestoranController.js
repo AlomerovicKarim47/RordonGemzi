@@ -1,4 +1,4 @@
-import RestoranDataAccess from '../data/RestoranDataAccess'
+import RestoranDataAccess from '../data/RestoranDataAccess.js'
 
 const dobaviRestorane = async (req, res, next) => {
     try {

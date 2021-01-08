@@ -1,12 +1,12 @@
-import loadExpress from './express'
-import loadSequelize from './sequelize'
-import loadRateLimiting from './rateLimiter'
-import KorisnikDataAccess from '../data/KorisnikDataAccess'
-import RestoranDataAccess from '../data/RestoranDataAccess'
-import RezervacijaDataAccess from '../data/RezervacijaDataAccess'
-import MeniDataAccess from '../data/MeniDataAccess'
-import JeloDataAccess from '../data/JeloDataAccess'
-import passwordHash from 'password-hash'
+import loadExpress from './express.js'
+import loadSequelize from './sequelize.js'
+import loadRateLimiting from './rateLimiter.js'
+import KorisnikDataAccess from '../data/KorisnikDataAccess.js'
+import RestoranDataAccess from '../data/RestoranDataAccess.js'
+import RezervacijaDataAccess from '../data/RezervacijaDataAccess.js'
+import MeniDataAccess from '../data/MeniDataAccess.js'
+import JeloDataAccess from '../data/JeloDataAccess.js'
+import md5 from 'md5'
 
 const load = async ({expressApp})=>{
     loadRateLimiting({app:expressApp})
@@ -27,7 +27,7 @@ const load = async ({expressApp})=>{
                 ime: "Karim",
                 prezime : "Alomerovic",
                 username : "dddd2",
-                password : passwordHash.generate("ergje14gfieg8fgh8dfgjibmn42bb0p6g9pxx"),
+                password : md5("ergje14gfieg8fgh8dfgjibmn42bb0p6g9pxx"), 
                 email : "kalomerovic@mail.com",
                 datumRodjenja : "16/12/1997",
                 role:"admin"
@@ -37,7 +37,7 @@ const load = async ({expressApp})=>{
                 ime: "Mujo",
                 prezime : "Hadzic",
                 username : "m2",
-                password : passwordHash.generate("12345"),
+                password : md5("12345"),
                 email : "mujo@mail.com",
                 datumRodjenja : "01/10/1997",
                 role:"user"
@@ -61,7 +61,7 @@ const load = async ({expressApp})=>{
             let dodajRezervaciju = {
                 restoranId: 1,
                 brojOsoba: 5,
-                datum: "21.1.2021",
+                datum: "21/1/2021",
                 vrijeme: "17:00",
                 userId: 1
             }
