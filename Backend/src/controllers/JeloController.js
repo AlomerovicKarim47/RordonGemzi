@@ -29,9 +29,6 @@ const dobaviJelaZaRestoran =  async (req, res) => {
         let restoranId = req.query.restoranId;
         let jelaIds = await MeniDataAccess.dobaviJelaZaRestoran(restoranId);
         let jela =  [];
-        jelaIds.forEach(element => {
-            console.log(element);
-        });
 
         for (const j of jelaIds) {
             let jelo = await JeloDataAccess.dohvatiJelo(j);
