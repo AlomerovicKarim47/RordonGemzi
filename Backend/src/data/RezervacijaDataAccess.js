@@ -1,4 +1,4 @@
-import KorisnikDataAccess from "./KorisnikDataAccess"
+import KorisnikDataAccess from "./KorisnikDataAccess.js"
 
 let database = null
 
