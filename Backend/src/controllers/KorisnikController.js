@@ -16,8 +16,6 @@ const registrujKorisnika = async (req, res, next) => {
 
 const login = async (req, res, next) => {
     let korisnik = await KorisnikDataAccess.nadjiKorisnika(req.body)
-    console.log(korisnik.password)
-    console.log(req.body.password)
     if (!korisnik || !(req.body.password === korisnik.password)) {
         res.statusCode = 401
         res.end()
