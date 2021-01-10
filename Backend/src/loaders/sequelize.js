@@ -14,11 +14,13 @@ const loadSequelize = async () => {
             host: 'localhost',
             port: 3306,
             user: 'root',
-            password: 'root'
+            password: ''
         })
+        //await connection.query('DROP DATABASE rordongemzi')
+        
         await connection.query('CREATE DATABASE IF NOT EXISTS rordongemzi')
         console.log("Created the databse.")
-        const sequelize = new Sequelize("mysql://root:root@localhost:3306/rordongemzi", { logging: false })
+        const sequelize = new Sequelize("mysql://root@localhost:3306/rordongemzi", { logging: false })
 
         database.Sequelize = Sequelize
         database.sequelize = sequelize
