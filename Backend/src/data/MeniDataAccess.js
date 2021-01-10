@@ -29,8 +29,11 @@ class MeniDataAccess{
    
 
     static async dodajMeni(meni){
-        try {
-            await database.Meni.create(meni);
+        try {            
+            let imaMeni = await database.Meni.findOne({where:{restoranId: meni.restoranId, jeloId: meni.jeloId }});
+            if(!imaMeni){
+                await database.Meni.create(meni);
+            }
             return
         } catch (error) {
             throw error
