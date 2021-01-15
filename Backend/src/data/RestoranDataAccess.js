@@ -29,7 +29,8 @@ class RestoranDataAccess{
 
     static async obrisiRestoran({restoranId}){
         try {
-            await database.Restoran.destroy({where:{id: restoranId}})
+            await database.Restoran.destroy({where:{id: restoranId}});
+            await database.Rezervacija.destroy({where:{restoranId: restoranId}});
             return
         } catch (error) {
             throw error
