@@ -3,13 +3,15 @@ import load from './loaders/index.js'
 const https = require('https')
 const path = require('path')
 const fs = require('fs')
-const startServer = async()=>{
-  const app = express()
+var httpProxy = require('http-proxy');
+const app = express()
+load({expressApp:app})
+const sslServer = https.createServer(
+  {
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'server.key')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'server.cert')),
+  },
+  app
+)
 
-  await load({expressApp:app})
-
-  console.log("RORDON GEMZI RUNNING ON PORT 7000.")
-  app.listen(7000)
-}
-
-startServer() 
+sslServer.listen(9000, () => console.log('Secure server started on port 9000'))
