@@ -8,9 +8,9 @@ import MeniDataAccess from '../data/MeniDataAccess.js'
 import JeloDataAccess from '../data/JeloDataAccess.js'
 import md5 from 'md5'
 
-const load = async ({expressApp})=>{
-    loadRateLimiting({app:expressApp})
-    const app = await loadExpress({app: expressApp})
+const load = async ({ expressApp }) => {
+    loadRateLimiting({ app: expressApp })
+    const app = await loadExpress({ app: expressApp })
     console.log("--Express app loaded.--")
     const database = await loadSequelize()
     KorisnikDataAccess.setDatabase(database)
@@ -19,59 +19,58 @@ const load = async ({expressApp})=>{
     MeniDataAccess.setDatabase(database)
     JeloDataAccess.setDatabase(database)
 
-    try{
+    try {
         let brojKorisnika = await KorisnikDataAccess.prebrojiKorisnike()
-        if (brojKorisnika == 0)
-        {
+        if (brojKorisnika == 0) {
             let admin = {
                 ime: "Karim",
-                prezime : "Alomerovic",
-                username : "dddd2",
-                password : md5("ergje14gfieg8fgh8dfgjibmn42bb0p6g9pxx"), 
-                email : "kalomerovic@mail.com",
-                datumRodjenja : "16/12/1997",
-                role:"admin"
+                prezime: "Alomerovic",
+                username: "kadmin",
+                password: md5("TSSecretAdminPassword2020"),
+                email: "kalomerovic@mail.com",
+                datumRodjenja: "16/12/1997",
+                role: "admin"
             }
             await KorisnikDataAccess.dodajKorisnika(admin)
             let user = {
                 ime: "Mujo",
-                prezime : "Hadzic",
-                username : "m2",
-                password : md5("12345"),
-                email : "mujo@mail.com",
-                datumRodjenja : "01/10/1997",
-                role:"user"
+                prezime: "Hadzic",
+                username: "muser",
+                password: md5("TSUserPassword2020"),
+                email: "mujo@mail.com",
+                datumRodjenja: "01/10/1997",
+                role: "user"
             }
             await KorisnikDataAccess.dodajKorisnika(user)
         }
 
-        let brojRestorana =  await RestoranDataAccess.prebrojiRestorane()
-        if(brojRestorana == 0){
+        let brojRestorana = await RestoranDataAccess.prebrojiRestorane()
+        if (brojRestorana == 0) {
             let restoran1 = {
                 naziv: "Restoran1",
                 adresa: "Ismeta Mujezinovica",
                 brojMjesta: 35,
                 brojDostupnihMjesta: 35
             }
-            let restoran2 = {                
+            let restoran2 = {
                 naziv: "Restoran2",
                 adresa: "Brace Begic",
                 brojMjesta: 20,
                 brojDostupnihMjesta: 20
-            }            
-            let restoran3 = {                
+            }
+            let restoran3 = {
                 naziv: "Restoran3",
                 adresa: "Marka Marulica",
-                brojMjesta: 10,
-                brojDostupnihMjesta: 10
+                brojMjesta: 40,
+                brojDostupnihMjesta: 40
             }
-            await RestoranDataAccess.dodajRestoran(restoran1); 
+            await RestoranDataAccess.dodajRestoran(restoran1);
             await RestoranDataAccess.dodajRestoran(restoran2);
-            await RestoranDataAccess.dodajRestoran(restoran3);  
+            await RestoranDataAccess.dodajRestoran(restoran3);
         }
 
         let brojRezevracija = await RezervacijaDataAccess.prebrojiRezervacije()
-        if(brojRezevracija == 0){
+        if (brojRezevracija == 0) {
             let dodajRezervaciju1 = {
                 restoranId: 1,
                 brojOsoba: 5,
@@ -81,7 +80,7 @@ const load = async ({expressApp})=>{
             }
             let dodajRezervaciju2 = {
                 restoranId: 1,
-                brojOsoba: 7,
+                brojOsoba: 6,
                 datum: "23/1/2021",
                 vrijeme: "13:00",
                 userId: 1
@@ -99,30 +98,30 @@ const load = async ({expressApp})=>{
             await RezervacijaDataAccess.dodajRezervaciju(dodajRezervaciju3);
 
         }
-        
+
         let brojJela = await JeloDataAccess.prebrojiJela();
-        if(brojJela == 0){
+        if (brojJela == 0) {
             let dodajJelo1 = {
-                    naziv: "Piletina",
-                    opis :  "Sarajevska piletina",
-                    cijena: "5.00"
-                }
+                naziv: "Piletina",
+                opis: "Sarajevska piletina",
+                cijena: "5.00"
+            }
             let dodajJelo2 = {
                 naziv: "Hamburger",
-                opis :  "Sarajevski hamburger",
+                opis: "Sarajevski hamburger",
                 cijena: "3.00"
             }
-            let dodajJelo3 = {                
+            let dodajJelo3 = {
                 naziv: "Pomfrit",
-                opis :  "Mali pomfrit",
+                opis: "Mali pomfrit",
                 cijena: "2.00"
             }
-            let dodajJelo4 = {                
+            let dodajJelo4 = {
                 naziv: "Salata",
-                opis :  "Sezonska salata",
+                opis: "Sezonska salata",
                 cijena: "3.00"
             }
-            
+
             await JeloDataAccess.dodajJelo(dodajJelo1);
             await JeloDataAccess.dodajJelo(dodajJelo2);
             await JeloDataAccess.dodajJelo(dodajJelo3);
@@ -130,8 +129,8 @@ const load = async ({expressApp})=>{
         }
 
 
-        let brojMenija =  await MeniDataAccess.prebrojiMenije();
-        if(brojMenija == 0){
+        let brojMenija = await MeniDataAccess.prebrojiMenije();
+        if (brojMenija == 0) {
             let meni11 = {
                 restoranId: 1,
                 jeloId: 1
@@ -178,9 +177,9 @@ const load = async ({expressApp})=>{
 
         console.log("--Sequelize loaded.--")
 
-        return{app}
+        return { app }
     }
-    catch(error){
+    catch (error) {
         throw error
     }
 }
