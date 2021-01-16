@@ -21,7 +21,7 @@ class KorisnikDataAccess {
                 username: md5(u.username),
                 password: encrypt(u.username, u.password),
                 email: u.email,
-                role: "admin"
+                role: "user"
             }
             await database.Korisnik.create(korisnik)
         }
