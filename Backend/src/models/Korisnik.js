@@ -1,38 +1,38 @@
 import Sequelize from 'sequelize'
 
-export default function (sequelize, DataTypes){
+export default function (sequelize, DataTypes) {
     const Korisnik = sequelize.define('Korisnik', {
-        ime:{
+        ime: {
             type: Sequelize.STRING,
-            unique:false,
-            allowNull:false
+            unique: false,
+            allowNull: false
         },
-        prezime:{
+        prezime: {
             type: Sequelize.STRING,
-            unique:false,
-            allowNull:false
+            unique: false,
+            allowNull: false
         },
-        email:{
+        email: {
             type: Sequelize.STRING,
-            unique:true,
-            allowNull:false
+            unique: true,
+            allowNull: false
         },
-        datumRodjenja:{
-            type:Sequelize.STRING,
-            unique:false,
-            allowNull:false
-        },
-        username:{
-            type:Sequelize.STRING,
-            unique:true,
-            allowNull:false
-        },
-        password:{
+        userSecret: {
             type: Sequelize.STRING,
-            unique:false,
-            allowNull:false
+            unique: true,
+            allowNull: false
         },
-        role:{
+        username: {
+            type: Sequelize.STRING,
+            unique: true,
+            allowNull: false
+        },
+        password: {
+            type: Sequelize.STRING,
+            unique: false,
+            allowNull: false
+        },
+        role: {
             type: Sequelize.STRING,
             unique: false,
             allowNull: false

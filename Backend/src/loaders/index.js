@@ -28,7 +28,6 @@ const load = async ({ expressApp }) => {
                 username: "kadmin",
                 password: md5("TSSecretAdminPassword2020"),
                 email: "kalomerovic@mail.com",
-                datumRodjenja: "16/12/1997",
                 role: "admin"
             }
             await KorisnikDataAccess.dodajKorisnika(admin)
@@ -38,7 +37,6 @@ const load = async ({ expressApp }) => {
                 username: "muser",
                 password: md5("TSUserPassword2020"),
                 email: "mujo@mail.com",
-                datumRodjenja: "01/10/1997",
                 role: "user"
             }
             await KorisnikDataAccess.dodajKorisnika(user)
