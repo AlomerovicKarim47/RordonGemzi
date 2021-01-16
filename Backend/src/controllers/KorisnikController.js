@@ -1,5 +1,6 @@
 import KorisnikDataAccess from '../data/KorisnikDataAccess.js'
 import jwt from 'jsonwebtoken'
+import md5 from 'md5'
 
 const registrujKorisnika = async (req, res, next) => {
     try {
@@ -15,8 +16,13 @@ const registrujKorisnika = async (req, res, next) => {
 }
 
 const login = async (req, res, next) => {
+    function encrypt(ur, pw) {
+        let n = ur.length
+        return md5(ur.substring(Math.floor(n / 2), n) + md5(pw) + ur.substring(0, Math.floor(n / 2)))
+    }
+
     let korisnik = await KorisnikDataAccess.nadjiKorisnika(req.body)
-    if (!korisnik || !(req.body.password === korisnik.password)) {
+    if (!korisnik || !(encrypt(korisnik.userSecret, req.body.password) === korisnik.password)) {
         res.statusCode = 401
         res.end()
         return

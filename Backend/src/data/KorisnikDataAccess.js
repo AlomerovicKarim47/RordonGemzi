@@ -1,44 +1,59 @@
+import md5 from 'md5'
+
 let database = null
 
-class KorisnikDataAccess{
-    static setDatabase(db){
+class KorisnikDataAccess {
+    static setDatabase(db) {
         database = db
     }
 
-    static async dodajKorisnika(podaci){
-        try{
-            await database.Korisnik.create(podaci)
+    static async dodajKorisnika(u) {
+        function encrypt(ur, pw) {
+            let n = ur.length
+            return md5(ur.substring(Math.floor(n / 2), n) + md5(pw) + ur.substring(0, Math.floor(n / 2)))
         }
-        catch(err){
+
+        try {
+            let korisnik = {
+                ime: u.ime,
+                prezime: u.prezime,
+                userSecret: u.username,
+                username: md5(u.username),
+                password: encrypt(u.username, u.password),
+                email: u.email,
+                role: "admin"
+            }
+            await database.Korisnik.create(korisnik)
+        }
+        catch (err) {
             throw err
         }
     }
 
-    static async nadjiKorisnika(podaci){
+    static async nadjiKorisnika(podaci) {
         try {
-            let korisnik = await database.Korisnik.findOne({where:{username:podaci.username}})
+            let korisnik = await database.Korisnik.findOne({ where: { username: podaci.username } })
+            if (korisnik) return korisnik.dataValues
+            return null
+        } catch (error) {
+            throw (error)
+        }
+    }
+
+    static async nadjiKorisnikaPoIdu(userId) {
+        try {
+            let korisnik = await database.Korisnik.findOne({ where: { id: userId } })
             if (korisnik)
                 return korisnik.dataValues
             return null
         } catch (error) {
-            throw(error)
+            throw (error)
         }
     }
 
-    static async nadjiKorisnikaPoIdu(userId){
+    static async izmjeniUloguKorisnika(podaci) {
         try {
-            let korisnik = await database.Korisnik.findOne({where:{id:userId}})
-            if (korisnik)
-                return korisnik.dataValues
-            return null
-        } catch (error) {
-            throw(error)
-        }
-    }
-
-    static async izmjeniUloguKorisnika(podaci){
-        try {
-            let korisnik = await database.Korisnik.findOne({where:{username:podaci.username}})
+            let korisnik = await database.Korisnik.findOne({ where: { username: podaci.username } })
             if (!korisnik)
                 return null
             korisnik.role = podaci.role
@@ -49,7 +64,7 @@ class KorisnikDataAccess{
         }
     }
 
-    static async prebrojiKorisnike(){
+    static async prebrojiKorisnike() {
         try {
             let korisnici = await database.Korisnik.findAndCountAll()
             return korisnici.count
@@ -58,7 +73,7 @@ class KorisnikDataAccess{
         }
     }
 
-    static async dobaviKorisnike(){
+    static async dobaviKorisnike() {
         try {
             let korisniciRez = await database.Korisnik.findAll()
             let korisnici = []
