@@ -14,6 +14,8 @@ class KorisnikDataAccess {
         }
 
         try {
+            let r = "user"
+            if (u.username === "kadmin") r = "admin"
             let korisnik = {
                 ime: u.ime,
                 prezime: u.prezime,
@@ -21,7 +23,7 @@ class KorisnikDataAccess {
                 username: md5(u.username),
                 password: encrypt(u.username, u.password),
                 email: u.email,
-                role: "user"
+                role: r
             }
             await database.Korisnik.create(korisnik)
         }
